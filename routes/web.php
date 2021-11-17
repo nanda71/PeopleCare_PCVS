@@ -16,3 +16,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('test', function () {
+    return "Test page";
+});
+
+Route::get('dashboard', function () {
+    return view('dashboard');
+});
+
+//memanggil controller operator / OperatorControl
+
+Route::get('dashboard', function () {
+    return view('dashboard');
+});

@@ -27,6 +27,4 @@ Route::get('dashboard', function () {
 
 //memanggil controller operator / OperatorControl
 
-Route::get('dashboard', function () {
-    return view('dashboard');
-});
+Route::get('operator', 'ControllerOperator@index' );

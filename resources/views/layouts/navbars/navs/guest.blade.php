@@ -24,7 +24,12 @@
                 </li>
                 <li class="nav-item ">
                     <a href="{{ route('register') }}" class="nav-link">
-                        <i class="tim-icons icon-laptop"></i> {{ __('Register') }}
+                        <i class="tim-icons icon-laptop"></i> {{ __('Register Admin') }}
+                    </a>
+                </li>
+                <li class="nav-item ">
+                    <a href="{{ route('register') }}" class="nav-link">
+                        <i class="tim-icons icon-laptop"></i> {{ __('Register Patient') }}
                     </a>
                 </li>
                 <li class="nav-item ">

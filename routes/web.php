@@ -41,3 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'App\Http\Controllers\ProfileController@password']);
 });
 
+Route::group(['prefix' => 'healthadmin','middleware'=>['healthadmin']], function () {
+
+    Route::get("/dashboard","healthadmin\HealthAdminController@index");
+    
+});

@@ -46,3 +46,4 @@ Route::group(['prefix' => 'healthadmin','middleware'=>['healthadmin']], function
     Route::get("/dashboard","healthadmin\HealthAdminController@index");
     
 });
+

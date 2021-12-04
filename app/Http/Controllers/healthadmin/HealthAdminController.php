@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Administrator;
 use App\Http\Requests\UserRequest;
 use Illuminate\Support\Facades\Hash;
+use Session;
+use Models\Batch as VaccineBatch;
+use Models\Vaccine as Vaccine;
 
 class HealthAdminController extends Controller
 {
@@ -18,4 +21,6 @@ class HealthAdminController extends Controller
     {
         return view('users.index', ['users' => $model->paginate(15)]);
     }
+
+    public function CreateNewBatch
 }

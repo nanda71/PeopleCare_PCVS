@@ -34,6 +34,18 @@ class PageController extends Controller
         return view('pages.tables');
     }
 
+    // public function getDataBatchTable(){
+    //     $data['data']=DB::table('vaccinebatch')->get();
+
+    //     if(count($data[0])>0){
+    //         return view('pages.tables',$data);
+    //     }
+    //     else
+    //     {
+    //         return view('pages.tables');
+    //     }
+    // }
+
     /**
      * Display notifications page
      *

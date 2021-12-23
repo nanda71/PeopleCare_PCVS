@@ -16,16 +16,20 @@ class DummyUsersSeeder extends Seeder
     {
         $userData = [
             [
-               'name'=>'Admin2',
-               'email'=>'admin2@hotmail.com',
-                'is_admin'=>'1',
+               'username'=>'Kurnia',
                'password'=> bcrypt('07070707'),
+               'email'=>'admin1@hotmail.com',
+               'fullName'=>'Kurniawati',
+               'role_num'=>1,
+               'centre_name' => 'ganesha health centre',
             ],
             [
-               'name'=>'Patient1',
-               'email'=>'Patient@gmail.com',
-                'is_admin'=>'0',
-               'password'=> bcrypt('07070707'),
+                'username'=>'bambang',
+                'password'=> bcrypt('07070707'),
+                'email'=>'patient2@hotmail.com',
+                'fullName'=>'bambang sutejo',
+                'role_num'=>0,
+                'ic_passport' => '09871234',
             ],
         ];
   

@@ -52,7 +52,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
@@ -60,6 +59,14 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <li class="nav-item dropdown">
+                        <label for="is_admin">Patient or Administrator</label>
+                            <select name="is_admin" id="is_admin">
+                                <option value="">--- Choose role ---</option>
+                                <option value=1>Admin</option>
+                                <option value=0>Patient</option>
+                            </select>
+                        </li>
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">

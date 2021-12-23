@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Dashboard') }}</div>
 
                 <div class="card-body">
-                    Hello, this is Patient Dashboard
+                    Hello, Patient!
                 </div>
                 
                 <div class="card-body">

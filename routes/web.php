@@ -22,3 +22,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/posts', PostController::class);
 Route::get('admin/home', 'HomeController@handleAdmin')->name('admin.route')->middleware('admin');
+Route::resource('/vaccines', VaccineController::class);
+Route::resource('/centre', HealthCareCentreController::class);
+Route::resource('/batch', VaccineBatchController::class);
+Route::resource('/vaccination', VaccinationController::class);
+//Route::resource('/???', UserController::class);
+

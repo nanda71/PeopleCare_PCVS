@@ -41,60 +41,60 @@ class VaccineController extends Controller
             'description' => 'required',
         ]);
 
-        Post::create($request->all());
+        vaccines::create($request->all());
 
-        return redirect()->route('vaccines.index')->with('success','Post successfully made.');
+        return redirect()->route('vaccines.index')->with('success','vaccines successfully registered.');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\vaccines  $vaccines
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(vaccines $vaccines)
     {
-        return view('vaccines.show',compact('post'));
+        return view('vaccines.show',compact('vaccines'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\vaccines  $vaccines
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(vaccines $vaccines)
     {
-        return view('vaccines.edit',compact('post'));
+        return view('vaccines.edit',compact('vaccines'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\vaccines  $vaccines
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, vaccines $vaccines)
     {
         $request->validate([
             'title' => 'required',
             'description' => 'required',
         ]);
 
-        $post->update($request->all());
-        return redirect()->route('vaccines.index')->with('success','Post is successfully updated');
+        $vaccines->update($request->all());
+        return redirect()->route('vaccines.index')->with('success','vaccines is successfully updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\vaccines  $vaccines
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(vaccines $vaccines)
     {
-        $post->delete();
-        return redirect()->route('vaccines.index')->with('Success','Post is successfully deleted');
+        $vaccines->delete();
+        return redirect()->route('vaccines.index')->with('Success','vaccines is successfully deleted');
     }
 }

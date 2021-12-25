@@ -38,6 +38,20 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'notlogin'=>[
+            Middleware\CheckLoginRole::class
+        ],
+        'admin'=>[
+            Middleware\CheckLogin::class,
+            Middleware\CheckAdmin::class
+        ],
+        'user'=>[
+            Middleware\CheckLogin::class,
+            Middleware\CheckUser::class
+        ],
+        'checkLogin'=>[
+            Middleware\CheckLogin::class,
+        ],
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
@@ -65,6 +79,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        'admin' => \App\Http\Middleware\isAdmin::class,
+        // 'admin' => \App\Http\Middleware\isAdmin::class,
     ];
 }

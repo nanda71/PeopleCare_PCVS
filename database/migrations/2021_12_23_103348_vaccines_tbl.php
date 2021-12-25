@@ -17,7 +17,6 @@ class VaccinesTbl extends Migration
             $table->bigIncrements('vaccine_id');
             $table->string('vaccine_name');
             $table->string('manufacturer');
-            $table->boolean('approved');
             $table->timestamps();
         });
     }

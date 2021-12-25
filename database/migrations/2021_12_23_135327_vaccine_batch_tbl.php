@@ -15,16 +15,7 @@ class VaccineBatchTbl extends Migration
     {
         Schema::create('vaccine_batch', function (Blueprint $table) {
             $table->bigIncrements('batch_id');
-            
-            $table->unsignedBigInteger('vaccine_id');
-            $table->unsignedBigInteger('healthcareCentre_id')->nullable();
-            $table->foreign('vaccine_id')
-            ->references('vaccine_id')
-            ->on('vaccines');
-            $table->foreign('healthcareCentre_id')
-            ->references('healthcareCentre_id')
-            ->on('healthcare_centre');
-            
+            $table->string('vaccine_name');
             $table->datetime('expiry_date');
             $table->Integer('qty_available');
             $table->Integer('qty_administered');
@@ -39,6 +30,6 @@ class VaccineBatchTbl extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vaccines');
+        Schema::dropIfExists('vaccine_batch');
     }
 }

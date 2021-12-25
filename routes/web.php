@@ -17,14 +17,38 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('logout',"Authentication@logout");
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('/posts', PostController::class);
-Route::get('admin/home', 'HomeController@handleAdmin')->name('admin.route')->middleware('admin');
-Route::resource('/vaccines', VaccineController::class);
-Route::resource('/centre', HealthCareCentreController::class);
-Route::resource('/batch', VaccineBatchController::class);
-Route::resource('/vaccination', VaccinationController::class);
-//Route::resource('/???', UserController::class);
+Route::prefix('patient')->group(function(){
+    Route::get('/login',"Authentication@IndexLoginPatient");
+    Route::post('/login',"Authentication@loginPatient");
+    Route::get('/register',"Authentication@IndexRegisterPatient");
+    Route::post('/register',"Authentication@RegisterPatient");
+    //after login
+    Route::get('/home',"PatientController@index");
+    //profile
+    Route::get('/profile',"Patient\ProfileController@index");
+    Route::post('/profile/update',"Patient\ProfileController@PostUpdateProfile");
+    //Request Appointment
+    Route::post('/RequestAppointment',"PatientController@RequestAppointmen");;
+});
+Route::group(['prefix' => 'admin','middleware'=>['admin']], function () {
+    Route::get('/login',"Authentication@IndexLoginAdmin");
+    Route::post('/login',"Authentication@loginAdmin");
+    Route::get('/register',"Authentication@IndexRegisterAdmin");
+    Route::post('/register',"Authentication@registerAdmin");
+    //after login
+    Route::get('/home',"Admin\AdminController@index");
+    //profile
+    Route::get('/profile',"Admin\ProfileController@index");
+    Route::post('/profile/update',"Admin\ProfileController@PostUpdateProfile");
+    //Vaccine Batch
+    Route::post('/NewVaccineBatch',"Admin\AdminController@registerBatch");;
+    Route::get('/VaccineAllBatch',"Admin\AdminController@ViewBatches");;
+    Route::get('/VaccineBatchDetail',"Admin\AdminController@ViewBatchDetail");;
+    //Vaccination Appointment
+    Route::get('/AppointmentDetail/{id}',"Admin\AdminController@getAppointmentDetail");;
+    Route::post('/ConfirmAppointment/{id}',"Admin\AdminController@ConfirmAppointment");;
+    Route::post('/AdministerAppointment/{id}',"Admin\AdminController@AdministerAppointment");;
+});
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>ADMIN - PeopleCare PCVS</title>
+    <title>PATIENT || Home PeopleCare PCVS Web</title>
     {{-- Form Only --}}
     <!--favicon-->
     <link rel="icon" href="{{asset('admin/assets/images/favicon.ico" type="image/x-icon')}}">
@@ -45,7 +45,7 @@
         @foreach ($errors->all() as $error)
             <script>error+={!!json_encode($error)!!}</script>
         @endforeach
-        <script>swal.fire("Failed",error)</script>
+        <script>swal("Failed",error)</script>
         @endif
 
         @include("components.footer-admin")

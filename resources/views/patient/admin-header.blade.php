@@ -11,8 +11,7 @@
      
      {{-- profile admin here --}}
      @if(Session::get('login'))
-     <!-- dibawah isi link ke profile -->
-         <a href="#" style="margin-right: 51px"> 
+        <a href="#" style="margin-right: 51px"> 
             Hi, 
             @if(Session::get('role')==1)Patient @else Admin @endif
             <span style="font-weight: 600; color:rgb(247, 14, 14);">{{Session::get('username')}}</span>             

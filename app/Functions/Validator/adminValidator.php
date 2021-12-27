@@ -4,10 +4,11 @@ namespace App\Functions\Validator;
 class AdminValidator{
 
     private static $validationRules = [
-        "username"=>"required|min:2|max:50|regex:/^[A-Za-z ]+$/",
-        "email"=>"required|min:4|max:50|email|unique:tb_users",
-        "password"=>"required|min:8|max:100|confirmed",
-        
+        "username"=>"required|min:2|max:50|",
+        "full_name"=>"required",
+        "email"=>"required|min:4|max:50|email|unique:t_admins",
+        "centre_id"=>"required|exists:t_centre,id",
+        "password"=>"required|confirmed|min:6",
     ];
 
     public static function getValidationRules(){

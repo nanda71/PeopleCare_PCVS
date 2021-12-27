@@ -4,10 +4,11 @@ namespace App\Functions\Validator;
 class patientValidator{
 
     private static $validationRules = [
-        "username"=>"required|min:2|max:50|regex:/^[A-Za-z ]+$/",
-        "email"=>"required|min:4|max:50|email|unique:tb_users",
-        "password"=>"required|min:8|max:100|confirmed",
-        "ic_passport"=>"required|confirmed",
+        "username"=>"required|min:2|max:50",
+        "fullName"=>"required",
+        "ic_passport"=>"required|unique:t_patients",
+        "email"=>"required|min:4|max:50|email|unique:t_patients",
+        "password"=>"required|confirmed|min:6",
     ];
 
     public static function getValidationRules(){
@@ -17,5 +18,5 @@ class patientValidator{
     public static function getValidationRule($key){
         return self::$validationRules[$key];
     }
-
 }
+?>

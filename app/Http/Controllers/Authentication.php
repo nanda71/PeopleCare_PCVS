@@ -5,10 +5,11 @@ namespace App\Http\Controllers;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use Session;
-use App\Functions\Validator\patientValidator;
-use App\Functions\Validator\adminValidator;
-use App\Models\tb_patient as Patient;
-use App\Models\tb_admin as Admin;
+use App\Functions\Validator\patientValidator as pa_val;
+use App\Functions\Validator\adminValidator as ad_val;
+use App\Models\t_patients as Patient;
+use App\Models\t_admins as Admin;
+use App\Models\t_centre as Centre;
 use App\create_code_verifications as Code;
 use Illuminate\Support\Facades\Mail;
 
@@ -31,12 +32,12 @@ class Authentication extends Controller
             "username"=>$admin->username,
             "email"=>$admin->email,
             "fullName"=>$admin->fullName,
-            "centre_name"=>$admin->centre_name,
+            "centre_id"=>$admin->centre_id,
         ];
         Session::put($sessionData);
     }
 
-    // === User
+    // === Patient
     private function setSessionPatient($patient){
         $sessionData = [
             "login"=>true,
@@ -49,16 +50,9 @@ class Authentication extends Controller
         Session::put($sessionData);
     }
 
-    // //Support function
-    // private static function isAlreadyLogin(){
-    //     if(Session::get("login")){
-    //         return true;
-    //     }
-    //     return false;
-    // }
-
     //====== route function =========//
-    // === Admin
+    // 
+    // === ADMIN ====
     public function IndexLoginAdmin(){
         return view("auth.login-admin");
     }
@@ -68,12 +62,12 @@ class Authentication extends Controller
             "password"=>"required"
         ]);
         $result = Admin::login($post->email,$post->password);
-        
         if($result->success){
-            
+
             if($result->login){
                 $this->setSessionAdmin($result->data);
-                return redirect('/admin/home')->with('toast_success',"Login success");
+                // return redirect('/admin/home')->alert()->success('Login Success','Congrats!');;
+                return redirect('/admin/home')->with("toast_success","Login success");
             }
             else{
                 return redirect('/admin/login')->with('toast_error',"email or password incorrect");
@@ -81,21 +75,31 @@ class Authentication extends Controller
         }return redirect('/admin/login')->with('toast_error',"Your data isn't match with our cridential,register first!");
     }
 
-    public function IndexRegisterAdmin(Request $req){
-        return view("auth.register-admin");
+    public function getRegFormAdmin(){
+        $Centres = Centre::all();
+        return view('auth.register-admin',[
+            "Centres"=> $Centres,
+        ]);
     }
 
-    public function registerAdmin(Request $req){
-        $validatedInput = $req->validate(adminValidator::getValidationRules());
-        $admin=Admin::registerAdmin($validatedInput);
+    public function RegisterAdmin(Request $req){
+        $req->merge([
+            "username"=>$req->username,
+            "full_name"=>$req->full_name,
+            "email"=>$req->email,
+            "centre_id"=>$req->centre_id,
+            "password"=>$req->password,
+        ]);
+        $validatedInput = $req->validate(ad_val::getValidationRules());
+        $admin = Admin::registerAdmin($validatedInput);
         if($admin->success){
-            // Session::flush();
-            return redirect("/admin/login")->with('toast_success',"Registration Success");
+            return redirect("/admin/login")->with('toast_success',"Registration Success, Please Check Email to Verify!");
         }else{
-            return redirect('/admin/login');
+            return redirect('/admin/register');
         }
     }
-    // === Patient
+
+    // === PATIENT ====
     public function IndexLoginPatient(){
         return view("auth.login-patient");
     }
@@ -105,50 +109,37 @@ class Authentication extends Controller
             "password"=>"required"
         ]);
         $result = Patient::login($post->email,$post->password);
-        
         if($result->success){
             if($result->login){
-                $this->setSessionUser($result->data);
-                return redirect('/')->with('toast_success',"Login success");
+                $this->setSessionPatient($result->data);
+                return redirect('/patient/home')->with('toast_success',"Login success");
             }
             else{
-                return redirect('/login')->with('toast_error',"email or password incorrect");
+                return redirect('/patient/login')->with('toast_error',"email or password incorrect");
             }
-        }return redirect('/login')->with('toast_error',"Your data isn't match with our cridential,register first!");
+        }return redirect('/patient/login')->with('toast_error',"Your data isn't match with our cridential,register first!");
     }
 
-    public function IndexRegisterPatient(Request $req){
-        return view("auth.register");
+    public function getPatientRegForm(){
+        return view("auth.register-patient");
     }
 
     public function RegisterPatient(Request $req){
         $req->merge([
+            "username"=>$req->username,
+            "fullName"=>$req->fullName,
+            "ic_passport"=>$req->ic_passport,
             "email"=>$req->email,
-            "user_photo"=>""
+            "password"=>$req->password,
         ]);
-        $validatedInput = $req->validate(userValidator::getValidationRules());
-        $patient=Patient::registerUser($validatedInput);
+        $validatedInput = $req->validate(pa_val::getValidationRules());
+        $patient=Patient::registerPatient($validatedInput);
         if($patient->success){
-            $patient=$patient->data;
-            // Session::flush();
-            /*$code = substr(str_shuffle("0123456789"), 0, 5);
-            Code::create([
-                'id'=>$patient->id,
-                'verification_code'=>$code,
-            ]);
-            
-            $to_name = $patient->username;
-            $to_email = $patient->email;
-            $data = array("name"=>$patient->username,"verification_code"=>$code, "link"=> "http://127.0.0.1:8000/verify/");
-            $mail = Mail::send("emailBody", $data, function($message) use ($to_name, $to_email) {
-            $message->to($to_email, $to_name)
-                ->subject("Verify Your Email");
-            $message->from('onlineartperformance@gmail.com',"OnlineArtPerformance");
-            });*/
-            return redirect("/")->with('toast_success',"Registration Success, Please Log in to your account!");
+            return redirect("/patient/login")->with('toastr.success',"Registration Success!");
         }else{
-            return redirect('/login');
+            return redirect('/patient/register')->with(toastr.success("Registration Failed"));
         }
+        
     }
 
     // === General

@@ -46,42 +46,43 @@
           </div>
         </div><!--End Row-->
   
-        <section class="blog-page" style="margin-top: -5px;margin-left:-102px;">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-9">
-                        <div class="blog-page__content blog-single">
-                            
-                        
-                            <!-- POST -->
-                            <div class="post">
-                                <div class="post-meta">
-                                    <div class="date">{{$news->created_at->diffForHumans()}}</div>
-                                    <div class="author">by <a href="#">{{$news->admin_author}}</a></div>
-                                </div>
-                                <div class="post-title">
-                                    <h1>{{$news->article_name}}</h1>
-                                </div>
-                                <div class="post-media">
-                                    <div class="image-wrap">
-                                        <img src="{{ url('/images/admin/news/'.$news->article_image) }}" alt="">
-                                    </div>
-                                </div>
-                                <div class="post-body">
-                                    <div class="post-content">
-                                        <p style="text-align: justify">{{$news->content}}</p>
-                                        <br>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- END / POST -->
-
-                            
-                        </div>
-                    </div>
-                </div>
+        <div class="row">
+		
+        <div class="col-lg-12">
+		
+          <div class="card">
+		   <div class="card-header text-uppercase text-info">LIST OF USERS</div>
+            <div class="card-body">
+			  <div class="table-responsive">
+                <table class="table">
+                  <thead class="thead-info">
+                    <tr>
+                      <th scope="col" style="text-align: center">No</th>
+                      <th scope="col" style="text-align: center">Username</th>
+                      <th scope="col" style="text-align: center">Email</th>
+                      <th scope="col" style="text-align: center">Handle</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $no = 1; ?>
+                    @foreach ($allUser as $aU)
+                    <tr>
+                      <th scope="row" style="text-align: center">{{$no++}}</th>
+                      <td style="text-align: center">{{$aU->username}}</td>
+                      <td style="text-align: center">{{$aU->email}}</td>
+                      <td style="text-align: center">
+                        <a href="/admin/detail/{{$aU->id}}" type="button" class="btn btn-success btn-round waves-effect waves-light m-1">Detail</a>
+                        <a href="/admin/delete/{{$aU->id}}" type="button" class="btn btn-danger btn-round waves-effect waves-light m-1">Delete</a>
+                      </td>
+                    </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+             </div>
             </div>
-        </section>
+          </div>
+        </div>
+      </div><!--End Row-->
   
         <!--End Dashboard Content-->
   

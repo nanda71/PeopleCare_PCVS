@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>OAP WEB</title>
+	<title> ADMIN || Sign Up - PeopleCare PCVS</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -42,19 +42,19 @@
 
 {{-- Form Only --}}
     <!--favicon-->
-    <link rel="icon" href="{{asset('dancerpage/assets/images/favicon.ico" type="image/x-icon')}}">
+    <link rel="icon" href="{{asset('admin/assets/images/favicon.ico" type="image/x-icon')}}">
     <!-- simplebar CSS-->
-    <link href="{{asset('dancerpage/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet')}}"/>
+    <link href="{{asset('admin/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet')}}"/>
     <!-- Bootstrap core CSS-->
-    <link href="{{asset('dancerpage/assets/css/bootstrap.min.css')}}" rel="stylesheet"/>
+    <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet"/>
     <!-- animate CSS-->
-    <link href="{{asset('dancerpage/assets/css/animate.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('admin/assets/css/animate.css')}}" rel="stylesheet" type="text/css"/>
     <!-- Icons CSS-->
-    <link href="{{asset('dancerpage/assets/css/icons.css')}}" rel="stylesheet" type="text/css"/>
+    <link href="{{asset('admin/assets/css/icons.css')}}" rel="stylesheet" type="text/css"/>
     <!-- Sidebar CSS-->
-    <link href="{{asset('dancerpage/assets/css/sidebar-menu.css')}}" rel="stylesheet"/>
+    <link href="{{asset('admin/assets/css/sidebar-menu.css')}}" rel="stylesheet"/>
     <!-- Custom Style-->
-    <link href="{{asset('dancerpage/assets/css/app-style.css')}}" rel="stylesheet"/>
+    <link href="{{asset('admin/assets/css/app-style.css')}}" rel="stylesheet"/>
 
     <script src="{{asset('/plugins/alerts-boxes/js/sweetalert.min.js')}}"></script>
 	<script src="{{asset('/plugins/alerts-boxes/js/sweet-alert-script.js')}}"></script>
@@ -104,23 +104,41 @@
                         REGISTER ADMIN
                     </span>
                     <div class="wrap-input100 validate-input" data-validate = "Username is required">
-                        <input class="input100" type="username" name="username" placeholder="username">
+                        <input class="input100" id="input-1" type="text" name="username" placeholder="username">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
                         </span>
                     </div>
-    
+                    <div class="wrap-input100 validate-input" data-validate = "Full Name is required">
+                        <input class="input100" id="input-2" type="text" name="full_name" placeholder="Full Name">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div>
                     <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="email" placeholder="Email">
+                        <input class="input100" id="input-3" type="email" name="email" placeholder="Email">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                         </span>
                     </div>
-    
+                    <!-- pilih healthcare centre -->
+                    <select class="form-control" id="input-4" name="centre_id">
+                            <option value="">
+                                Please select healthcare centre
+                            </option>
+                        @foreach ($Centres as $c)
+                            <option value="{{ $c->id }}"> 
+                                {{ $c->centre_name }}
+                            </option>
+                        @endforeach
+                        <i class="fa fa-lock" aria-hidden="true"></i>
+                    </select>
+                    <!-- end of choosing centre-->
                     <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                        <input class="input100" type="password" name="password" placeholder="Password">
+                        <input class="input100" id="input-5" type="password" name="password" placeholder="Password">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
@@ -128,7 +146,7 @@
                     </div>
                     
                     <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                        <input class="input100" type="password" name="password_confirmation" placeholder="Password_confirmation">
+                        <input class="input100" id="input-6" type="password" name="password_confirmation" placeholder="Password_confirmation">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
@@ -145,8 +163,8 @@
         </div>
     </div>
 
-        @include("components.footer")
-        @include('sweetalert::alert')
+    @include('components.footer')
+    @include('sweetalert::alert')
     
 </body>
 </html>

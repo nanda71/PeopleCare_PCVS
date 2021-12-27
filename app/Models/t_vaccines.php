@@ -5,29 +5,37 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class vaccines extends Model
+class t_vaccines extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
+    protected $table = "t_vaccines";
     protected $fillable = [
         'vaccine_name',
         'manufacturer',
-        'approved'
+        'centre_id',
     ];
 
     public function batch(){
-        return $this->hasMany('App\Models\batch',"vaccine_name");
+        return $this->hasMany('App\Models\t_batch',"vaccine_name");
     }
 
     public static function createVaccine($validatedData){
         $vaccine = self::create($validatedData);
-        if($vaccineBatch){
-            return (object)[
+        if($vaccine){
+            return (object)
+            [
                 "success"=>true,
-                "data"=>$vaccine];}
-        return (object)[
+                "data"=>$vaccine
+            ];
+        }
+        return (object)
+        [
             "success"=>false,
-            "message"=>"Failed to register Vaccine!"];
+            "message"=>"Failed to register Vaccine!"
+        ];
     }
     
     public static function getBatchById($vaccine_id){
@@ -62,7 +70,15 @@ class vaccines extends Model
 
     public static function updateVaccineInfo($id,$validatedData){
         $vaccine = self::where("vaccine_id",$id)->update($validatedData);
-        if($vaccine){return (object)["success"=>true,"data"=>$vaccine];}
-        return (object)["success"=>false,"message"=>"Update failed!"];
+        if($vaccine){
+            return (object)[
+                "success"=>true,
+                "data"=>$vaccine
+            ];
+        }
+        return (object)[
+            "success"=>false,
+            "message"=>"Update failed!"
+        ];
     }
 }

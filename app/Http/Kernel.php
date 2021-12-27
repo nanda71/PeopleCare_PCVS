@@ -45,9 +45,9 @@ class Kernel extends HttpKernel
             Middleware\CheckLogin::class,
             Middleware\CheckAdmin::class
         ],
-        'user'=>[
+        'patient'=>[
             Middleware\CheckLogin::class,
-            Middleware\CheckUser::class
+            Middleware\CheckPatient::class
         ],
         'checkLogin'=>[
             Middleware\CheckLogin::class,

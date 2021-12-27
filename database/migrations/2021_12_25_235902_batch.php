@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class VaccineBatchTbl extends Migration
+class Batch extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class VaccineBatchTbl extends Migration
      */
     public function up()
     {
-        Schema::create('vaccine_batch', function (Blueprint $table) {
-            $table->bigIncrements('batch_id');
+        Schema::create('t_batch', function (Blueprint $table) {
+            $table->id();
+            // $table->unsignedBigInteger('centre_id');
+            $table->string('centre_name');
             $table->string('vaccine_name');
             $table->datetime('expiry_date');
             $table->Integer('qty_available');
@@ -30,6 +32,6 @@ class VaccineBatchTbl extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vaccine_batch');
+        //
     }
 }

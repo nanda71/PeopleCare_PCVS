@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\tb_patient as Patient;
+use App\Models\t_patients as Patient;
 
 class dummy_patient extends Seeder
 {
@@ -17,10 +17,10 @@ class dummy_patient extends Seeder
         $userData = [
             [
                'username'=>'Kurnia',
-               'password'=> bcrypt('07070707'),
-               'email'=>'admin1@hotmail.com',
+               'email'=>'Kurnia@hotmail.com',
                'fullName'=>'Kurniawati',
                'ic_passport' => "0987654",
+               'password'=> bcrypt('07070707'),
             ],
         ];
   

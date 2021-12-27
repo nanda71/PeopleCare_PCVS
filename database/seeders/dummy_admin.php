@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\tb_admin as Admin;
+use App\Models\t_admins as Admin;
 
-class DummyUsersSeeder extends Seeder
+class dummy_admin extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,11 +16,12 @@ class DummyUsersSeeder extends Seeder
     {
         $userData = [
             [
-               'username'=>'Kurnia',
+               'username'=>'Bambang',
                'password'=> bcrypt('07070707'),
-               'email'=>'admin1@hotmail.com',
-               'fullName'=>'Kurniawati',
-               'centre_name' => "ganesha health centre",
+               'email'=>'bambang@hotmail.com',
+               'fullName'=>'Bambang Sutejo',
+               'centre_id' =>'1',
+               'centre_name' => 'Sanglah',
             ],
         ];
   

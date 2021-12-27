@@ -17,7 +17,7 @@ class CheckPatient
     public function handle($request, Closure $next)
     {
         if(Session::get('role')!=1){
-            $url = Session::get('role')==0?"/":"/";
+            $url = Session::get('role')==1?"/patient/home":"/";
             return redirect($url)->withErrors(["Forbidden Acces!"]);
         }
         return $next($request);

@@ -3,18 +3,26 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
 
-class tb_admin extends Model
+class t_admins extends Model
 {
-    protected $table = "admins";
+    // use HasFactory, Notifiable;
+    protected $table = "t_admins";
     protected $fillable = [
         "username",
-        "password",
+        "full_name",
         "email",
-        "fullName",
-        "centreName",
+        "centre_id",
+        "password",
     ];
+
+    public function centre(){
+        return $this->belongsTo('App\Models\t_centre');
+    }
+
     public static function getUserById($idUser){
         $user = self::where("id",$idUser)->get();
         if($user){return (object)["success"=>true,"data"=>$user];}
@@ -29,11 +37,11 @@ class tb_admin extends Model
     public static function isExist($emailOrUsername){
         //check is email or username
         $user=false;
-        if(self::checkEmail($emailOrUsername))
+        if(self::checkEmail($emailOrUsername)){
             $user=self::where('email', $emailOrUsername)->first();
-        else
+        }else{
             $user=self::where('username',$emailOrUsername)->first();
-
+        }
         return (object)[
             "success"=>true,
             "exist"=>$user?true:false,
@@ -44,11 +52,11 @@ class tb_admin extends Model
     public static function registerAdmin($validatedSubmitedData){
         $data=$validatedSubmitedData;
         $data["password"]=Hash::make($data["password"]);
-        $user=self::create($data);
-        if($user){
+        $admin=self::create($data);
+        if($admin){
             return(object)[
                 "success"=>true,
-                "data"=>$user
+                "data"=>$admin
             ];
         }
         return(object)[
@@ -61,8 +69,12 @@ class tb_admin extends Model
     public static function login($email,$password){
         $user=self::isExist($email);
         if($user->exist){
-            $isPasswordCorrect = Hash::check($password, $user->data->password);
-            if($isPasswordCorrect)
+
+            $checkpwinput = Hash::check($password, $user->data->password);
+            // $checkpwinput = password_verify($password,$user->data->password);
+            // dd($checkpwinput);
+
+            if($checkpwinput)
                 return (object)[
                     "success"=>true,
                     "login"=>true,

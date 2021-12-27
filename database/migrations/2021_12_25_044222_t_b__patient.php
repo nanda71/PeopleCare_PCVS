@@ -13,13 +13,13 @@ class TBPatient extends Migration
      */
     public function up()
     {
-        Schema::create('patients', function (Blueprint $table) {
+        Schema::create('t_patients', function (Blueprint $table) {
             $table->id();
             $table->string('username');
-            $table->string('password');
-            $table->string('email');
             $table->string('fullName');
-            $table->Integer('ic_passport')->nullable();
+            $table->string('ic_passport');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->timestamp('email_verified_at');
             $table->rememberToken();
             $table->timestamps();

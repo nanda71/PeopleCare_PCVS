@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>ADMIN || Log In- PeopleCare PCVS</title>
+	<title>Patient || REGISTER - PeopleCare PCVS</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -37,11 +37,25 @@
 <!--===============================================================================================-->
 {{-- Sweet alert --}}
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
 {{-- Form Only --}}
+    <!--favicon-->
+    <link rel="icon" href="{{asset('admin/assets/images/favicon.ico" type="image/x-icon')}}">
+    <!-- simplebar CSS-->
+    <link href="{{asset('admin/assets/plugins/simplebar/css/simplebar.css" rel="stylesheet')}}"/>
+    <!-- Bootstrap core CSS-->
+    <link href="{{asset('admin/assets/css/bootstrap.min.css')}}" rel="stylesheet"/>
+    <!-- animate CSS-->
+    <link href="{{asset('admin/assets/css/animate.css')}}" rel="stylesheet" type="text/css"/>
+    <!-- Icons CSS-->
+    <link href="{{asset('admin/assets/css/icons.css')}}" rel="stylesheet" type="text/css"/>
+    <!-- Sidebar CSS-->
+    <link href="{{asset('admin/assets/css/sidebar-menu.css')}}" rel="stylesheet"/>
+    <!-- Custom Style-->
+    <link href="{{asset('admin/assets/css/app-style.css')}}" rel="stylesheet"/>
+
     <script src="{{asset('/plugins/alerts-boxes/js/sweetalert.min.js')}}"></script>
 	<script src="{{asset('/plugins/alerts-boxes/js/sweet-alert-script.js')}}"></script>
 
@@ -76,6 +90,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
 <body class="animsition">
+
     <div class="limiter">
         <div class="container-login100">
             <div class="wrap-login100">
@@ -83,22 +98,50 @@
                     <img src="{{asset('loginuser/images/img-01.png')}}" alt="IMG">
                 </div>
     
-                <form class="login100-form validate-form" action="/admin/login" method="POST">
+                <form class="login100-form validate-form" action="/patient/register" method="POST">
                     @csrf
                     <span class="login100-form-title">
-                        Administrator Login
+                        Welcome Patient,
+                        Please Register
                     </span>
-    
+                    <div class="wrap-input100 validate-input" data-validate = "Username is required">
+                        <input class="input100" id="input-1" type="text" name="username" placeholder="username">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate = "Full Name is required">
+                        <input class="input100" id="input-2" type="text" name="fullName" placeholder="Full Name">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate = "IC Passport is required">
+                        <input class="input100" id="input-3" type="text" name="ic_passport" placeholder="IC Passport">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div>
                     <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="email" name="email" placeholder="Email">
+                        <input class="input100" id="input-4" type="email" name="email" placeholder="Email">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                         </span>
                     </div>
-    
                     <div class="wrap-input100 validate-input" data-validate = "Password is required">
-                        <input class="input100" type="password" name="password" placeholder="Password">
+                        <input class="input100" id="input-5" type="password" name="password" placeholder="Password">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                    </div>
+                    
+                    <div class="wrap-input100 validate-input" data-validate = "Password is required">
+                        <input class="input100" id="input-6" type="password" name="password_confirmation" placeholder="Password_confirmation">
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
@@ -107,32 +150,16 @@
                     
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn" type="submit">
-                            Login Admin
+                            REGISTER
                         </button>
-                    </div>
-    
-                    <div class="text-center p-t-12">
-                        <span class="txt1">
-                            Forgot
-                        </span>
-                        <a class="txt2" href="#">
-                            Username / Password?
-                        </a>
-                    </div>
-    
-                    <div class="text-center p-t-136">
-                        <a class="txt2" href="/admin/register">
-                            Create your Account
-                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                        </a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 
-        @include("components.footer")
-        @include('sweetalert::alert')
+    @include('components.footer')
+    @include('sweetalert::alert')
     
 </body>
 </html>

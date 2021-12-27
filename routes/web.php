@@ -36,6 +36,8 @@ Route::prefix('patient')->group(function(){
     Route::get('/AllVaccines',"Patient\PatientController@GetAllVaccines");
     Route::get('/getAppointmentForm',"Patient\PatientController@getRequestForm");
     Route::post('/NewAppointment',"PatientController@RequestAppointment");;
+
+    Route::get('detail/{id}',"PatientController@getVaccineDetail");;
 });
 
 // ===== Admin =====

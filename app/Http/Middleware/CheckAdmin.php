@@ -17,7 +17,7 @@ class CheckAdmin
     public function handle($request, Closure $next)
     {
         if(Session::get('role')!=2){
-            $url = Session::get('role')==0?"/":"/";
+            $url = Session::get('role')==2?"/admin/home":"/";
             return redirect($url)->withErrors(["Forbidden Acces!"]);
         }
         return $next($request);

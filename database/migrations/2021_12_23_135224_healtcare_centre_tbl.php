@@ -13,9 +13,9 @@ class HealtcareCentreTbl extends Migration
      */
     public function up()
     {
-        Schema::create('healthcare_centre', function (Blueprint $table) {
-            $table->bigIncrements('healthcareCentre_id');
-            $table->string('centreName');
+        Schema::create('t_centre', function (Blueprint $table) {
+            $table->id();
+            $table->string('centre_name');
             $table->string('address');
             $table->timestamps();
         });

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostTbl extends Migration
+class VaccinesTbl extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreatePostTbl extends Migration
      */
     public function up()
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('t_vaccines', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->text('description');
+            $table->string('vaccine_name');
+            $table->string('manufacturer');
+            // $table->Integer('approved');
+            $table->bigInteger('centre_id')->unsigned();
+            $table->foreign('centre_id')->references('id')->on('t_centre');
             $table->timestamps();
         });
     }
@@ -28,6 +31,6 @@ class CreatePostTbl extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('vaccines');
     }
 }

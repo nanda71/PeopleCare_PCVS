@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>PeopleCare PCVS - HealthCare Centre Patient</title>
+	<title>Patient || LOGIN - PeopleCare PCVS</title>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->
@@ -37,6 +37,7 @@
 <!--===============================================================================================-->
 {{-- Sweet alert --}}
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
 
@@ -83,7 +84,7 @@
                     <img src="{{asset('loginuser/images/img-01.png')}}" alt="IMG">
                 </div>
     
-                <form class="login100-form validate-form" action="/admin/login" method="POST">
+                <form class="login100-form validate-form" action="/patient/login" method="POST">
                     @csrf
                     <span class="login100-form-title">
                         Welcome Patient, please login
@@ -107,7 +108,7 @@
                     
                     <div class="container-login100-form-btn">
                         <button class="login100-form-btn" type="submit">
-                            Login Admin
+                            Login Patient
                         </button>
                     </div>
     
@@ -121,10 +122,10 @@
                     </div>
     
                     <div class="text-center p-t-136">
-                        {{-- <a class="txt2" href="/admin/register">
+                        <a class="txt2" href="/patient/register">
                             Create your Account
                             <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-                        </a> --}}
+                        </a> 
                     </div>
                 </form>
             </div>

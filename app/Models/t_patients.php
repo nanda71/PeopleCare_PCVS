@@ -3,25 +3,22 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Notifications\Notifiable;
 
-class tb_patient extends Model
+class t_patients extends Model
 {
-    //
-    protected $table = "patients";
+    use HasFactory, Notifiable;
+    protected $table = "t_patients";
     protected $fillable = [
         "username",
+        "fullName",
+        "ic_passport",
         "email",
         "password",
-        "user_photo",
     ];
 
-    public function comments(){
-        return $this->hasMany('App\tb_comment',"user_id");
-    }
-    public function message(){
-        return $this->hasMany('App\tb_message','user_id');
-    }
     public static function getUserById($idUser){
         $user = self::where("id",$idUser)->get();
         if($user){return (object)["success"=>true,"data"=>$user];}
@@ -79,7 +76,7 @@ class tb_patient extends Model
         }
     }
 
-    public static function registerUser($validatedSubmitedData){
+    public static function registerPatient($validatedSubmitedData){
         $data=$validatedSubmitedData;
         $data["password"]=Hash::make($data["password"]);
         $user=self::create($data);

@@ -5,11 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class batch extends Model
+class t_batch extends Model
 {
     use HasFactory;
     
+    protected $table = "t_batch";
     protected $fillable = [
+        'centre_name',
+        'vaccine_name',
         'expiry_date',
         'qty_available',
         'qty_administered',
@@ -19,13 +22,14 @@ class batch extends Model
         return $this->belongsTo('App\Models\vaccines');
     }
 
-    public static function AddNewBatch($validatedData){
+    public static function CreateBatch($validatedData){
         $Batch = self::create($validatedData);
         if($Batch){
-            return (object)[
+            return (object)
+            [
                 "success"=>true,
-                "data"=>$Batch];
-            }
+                "data"=>$Batch
+            ];}
         return (object)[
             "success"=>false,
             "message"=>"Failed to add Batch!"
@@ -42,7 +46,7 @@ class batch extends Model
         }
         return (object)[
             "success"=>false,
-            "message"=>"Gagal menemukan user"
+            "message"=>"Failed finding batches"
         ];
     }
 

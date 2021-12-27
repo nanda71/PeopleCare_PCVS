@@ -18,37 +18,55 @@ Route::get('/', function () {
 });
 
 Route::get('logout',"Authentication@logout");
-
+// ===== Patient =====
 Route::prefix('patient')->group(function(){
     Route::get('/login',"Authentication@IndexLoginPatient");
     Route::post('/login',"Authentication@loginPatient");
-    Route::get('/register',"Authentication@IndexRegisterPatient");
-    Route::post('/register',"Authentication@RegisterPatient");
-    //after login
-    Route::get('/home',"PatientController@index");
-    //profile
-    Route::get('/profile',"Patient\ProfileController@index");
-    Route::post('/profile/update',"Patient\ProfileController@PostUpdateProfile");
-    //Request Appointment
-    Route::post('/RequestAppointment',"PatientController@RequestAppointmen");;
+    Route::get('/register',"Authentication@getPatientRegForm"); 
+    Route::post('/register',"Authentication@RegisterPatient"); 
+    // 
+    //---- home ----- 
+    Route::get('/home',"Patient\PatientController@index");
+    // 
+    //----- profile -----
+    // Route::get('/profile',"Patient\ProfileController@index");
+    // Route::post('/profile/update',"Patient\ProfileController@PostUpdateProfile");
+    // 
+    //----- Vaccinations & Vaccines -----
+    Route::get('/AllVaccines',"Patient\PatientController@GetAllVaccines");
+    Route::get('/getAppointmentForm',"Patient\PatientController@getRequestForm");
+    Route::post('/NewAppointment',"PatientController@RequestAppointment");;
 });
-Route::group(['prefix' => 'admin','middleware'=>['admin']], function () {
-    Route::get('/login',"Authentication@IndexLoginAdmin");
-    Route::post('/login',"Authentication@loginAdmin");
-    Route::get('/register',"Authentication@IndexRegisterAdmin");
-    Route::post('/register',"Authentication@registerAdmin");
-    //after login
-    Route::get('/home',"Admin\AdminController@index");
-    //profile
-    Route::get('/profile',"Admin\ProfileController@index");
-    Route::post('/profile/update',"Admin\ProfileController@PostUpdateProfile");
-    //Vaccine Batch
-    Route::post('/NewVaccineBatch',"Admin\AdminController@registerBatch");;
-    Route::get('/VaccineAllBatch',"Admin\AdminController@ViewBatches");;
-    Route::get('/VaccineBatchDetail',"Admin\AdminController@ViewBatchDetail");;
-    //Vaccination Appointment
-    Route::get('/AppointmentDetail/{id}',"Admin\AdminController@getAppointmentDetail");;
-    Route::post('/ConfirmAppointment/{id}',"Admin\AdminController@ConfirmAppointment");;
-    Route::post('/AdministerAppointment/{id}',"Admin\AdminController@AdministerAppointment");;
-});
+
+// ===== Admin =====
+Route::prefix('admin')->group(function (){
+        Route::get('/login',"Authentication@IndexLoginAdmin");
+        Route::post('/login',"Authentication@loginAdmin");
+        Route::get('/register',"Authentication@getRegFormAdmin");
+        Route::post('/register',"Authentication@RegisterAdmin");
+        // 
+        //---- Home -----
+        Route::get('/home',"Admin\AdminController@index");
+        // 
+        //---- profile -----
+        // Route::get('/profile',"Admin\ProfileController@index");
+        // Route::post('/profile/update',"Admin\ProfileController@PostUpdateProfile");
+        // 
+        //---- Vaccine ----- 
+        Route::get('/AllVaccine',"Admin\AdminController@ViewAllVaccines");;
+        Route::get('/getFormVaccine',"Admin\AdminController@getFormVaccine");;
+        Route::post('/NewVaccine',"Admin\AdminController@PostNewVaccine");;
+        // 
+        //----- Vaccine Batch ----
+        Route::post('/PostNewBatch',"Admin\AdminController@postFormBatch");;
+        Route::get('/NewBatch/{id}',"Admin\AdminController@getFormBatch");;
+        Route::get('/BatchDetail/{id}',"Admin\AdminController@getBatchDetail");;
+        // 
+        //---- Vaccination Appointment ----
+        // 
+        // 
+        
+        
+    }
+);
 

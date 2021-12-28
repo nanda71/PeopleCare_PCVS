@@ -18,6 +18,10 @@ class t_vaccines extends Model
         'centre_id',
     ];
 
+    public function getID(){
+        return this('id');
+    }
+
     public function batch(){
         return $this->hasMany('App\Models\t_batch',"vaccine_name");
     }

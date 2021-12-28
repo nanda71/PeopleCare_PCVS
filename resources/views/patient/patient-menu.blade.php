@@ -20,9 +20,8 @@
                     <div class="block3">
                         <div class="block3-txt p-t-14">
                             <h4 class="p-b-7">
-                                <a href="/detail/{{$v->id}}" class="m-text11">
-                                    {{$v->vaccine_name}}
-                                    {{$v->manufacturer}}
+                                <a href="/patient/detail/{{$v->id}}" class="m-text11">
+                                    {{$v->vaccine_name}} - {{$v->manufacturer}}
                                 </a>
                             </h4>
                         </div>

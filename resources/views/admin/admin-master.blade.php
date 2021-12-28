@@ -36,9 +36,8 @@
 
         <script src="{{asset('/plugins/alerts-boxes/js/sweetalert.min.js')}}"></script>
         <script src="{{asset('/plugins/alerts-boxes/js/sweet-alert-script.js')}}"></script>
-</head>
-<body>
-
+    </head>
+    <body>
         @yield('content')
         @if ($errors->any())
         <script>let error = "";</script>
@@ -50,6 +49,5 @@
 
         @include("components.footer-admin")
         @include('sweetalert::alert')
-	
-</body>
+    </body>
 </html>

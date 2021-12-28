@@ -4,14 +4,16 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use File;
+use Illuminate\Support\Str;
+use Session;
+// ==== USE MODELS ====
 use App\Models\t_patients as Patient;
 use App\Models\t_admins as Admin;
 use App\Models\t_vaccines as Vaccine;
 use App\Models\t_batch as Batch;
 use App\Models\t_centre as Centre;
-use File;
-use Illuminate\Support\Str;
-use Session;
+use App\Models\t_relasiVaccineCentre as Relasi;
 
 class AdminController extends Controller
 {
@@ -26,7 +28,6 @@ class AdminController extends Controller
             "allBatch"=>$allBatch,
             "centre"=>$centre,
         ]);
-
     }
 
     public function ViewAllVaccines(Request $req){
@@ -41,17 +42,24 @@ class AdminController extends Controller
     public function getFormVaccine(){
         return view('admin.form-input-vaccine');
     }
-    
+
     public function PostNewVaccine(Request $req){
         $validatedData = $req->validate([
             'vaccine_name'=>"required|string",
             'manufacturer'=>"required|string",
-            'centre_id'=>"required||exists:t_centre,id",
+            'centre_id'=>"required|exists:t_centre,id",
         ]);
-        $ifSuccess = Vaccine::createVaccine($validatedData);
-        if(!$ifSuccess->success){
+        $newVaccine = Vaccine::createVaccine($validatedData);
+        $newRelasi = Relasi::create([
+            "vaccine_id"=>$newVaccine->data->id,
+            "centre_id"=>$Session::get('centre_id')
+        ]);
+        if(!$newVaccine->success){
             return redirect()->back()->with('toast_error',["Failed to input information"]);
         }
+        // if(!ifRelated->success){
+        //     return redirect()->back()->with('toast_error',["Failed to input information, not related"]);
+        // }
         return redirect('/admin/AllVaccine')->with('toast_success',["Input Information Success"]);
     }
     // ==== VACCINE BATCH ====

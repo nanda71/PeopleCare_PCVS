@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class VaccinesTbl extends Migration
+class RelasiVaksinCentre extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class VaccinesTbl extends Migration
      */
     public function up()
     {
-        Schema::create('t_vaccines', function (Blueprint $table) {
-            $table->id();
-            $table->string('vaccine_name');
-            $table->string('manufacturer');
+        Schema::create('t_relasiVaccineCentre', function (Blueprint $table)
+        {
+            $table->bigInteger('vaccine_id')->unsigned();
             $table->bigInteger('centre_id')->unsigned();
-            $table->foreign('centre_id')->references('id')->on('t_centre');
             $table->timestamps();
+            $table->foreign('vaccine_id')->references('id')->on('t_vaccines');
+            $table->foreign('centre_id')->references('id')->on('t_centre');
         });
     }
 
@@ -30,6 +30,6 @@ class VaccinesTbl extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('vaccines');
+        //
     }
 }

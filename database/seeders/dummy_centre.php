@@ -18,11 +18,14 @@ class dummy_centre extends Seeder
             [
                'centre_name'=>'Sanglah',
                'address'=>'Denpasar',
-            ],
-            [
+            ],[
                 'centre_name'=>'Ganesha',
                 'address'=>'Gianyar',
+            ],[
+                'centre_name'=>'Puri Bundha',
+                'address'=>'Gianyar',
              ],
+             
         ];
   
         foreach ($data as $key => $val) {

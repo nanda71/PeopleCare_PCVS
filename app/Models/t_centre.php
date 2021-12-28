@@ -20,11 +20,11 @@ class t_centre extends Model
     }
 
     public static function getCentreById($idCentre){
-        $data=self::where("centre_id",$idCentre)->get();
+        $data=self::where("id",$idCentre)->get();
         if($data){
             return (object)[
                 "success"=>true,
-                "exist"=>count($data)>0,
+                // "exist"=>count($data)>0,
                 "data"=>$data
             ];
         }

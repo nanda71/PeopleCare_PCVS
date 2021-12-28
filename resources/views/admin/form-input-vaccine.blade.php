@@ -76,6 +76,7 @@
                                 <label for="input-2">Manufacturer</label>
                                 <input type="text" class="form-control" id="input-2" name="Manufacturer" placeholder="Enter manufacturer">
                             </div>
+                            <input type="text" value="{{ Session::get('centre_id') }}" class="form-control" id="input-2" name="centre_id" placeholder="" hidden>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-info shadow-info px-5"><i class="icon-lock"></i> Submit</button>
                             </div>

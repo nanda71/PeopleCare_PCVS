@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\t_patients as Patient;
 use App\Models\t_vaccines as Vaccine;
 use App\Models\t_batch as Batch;
+use App\Models\t_centre as Centre;
 use App\Models\t_vaccination_appointment as Appointment;
 use File;
 use Illuminate\Support\Str;
@@ -21,6 +22,7 @@ class PatientController extends Controller
         return view('patient.patient-menu',[
             "patient"=>$patient,
             "allBatch"=>$allBatch,
+            "vaccine"=>$vaccine,
         ]);
     }
 
@@ -36,9 +38,16 @@ class PatientController extends Controller
     public function getVaccineDetail($id){
         $patient = Patient::find(Session::get('id'));
         $vaccine = Vaccine::find($id);
+        $AllVaccine = Vaccine::all();
+        $centre = Centre::all(); 
+        // foreach($centre as $c){
+        $centresVaccine = Centre::where('id',$vaccine['centre_id'])->get();
+        // }
+        dd($centresVaccine);
         return view('patient.vaccine-detail',[
             "patient"=>$patient,
             "vaccine"=>$vaccine,
+            "centre"=>$centre,
         ]);
     }   
 

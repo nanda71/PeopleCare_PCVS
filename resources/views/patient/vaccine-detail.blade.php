@@ -13,53 +13,45 @@
   <!--End topbar header-->
   
   <div class="clearfix"></div>
-      
     <div class="content-wrapper">
-      <div class="container-fluid">
-  
-        <!--Start Dashboard Content-->
-        
-        <div class="row mt-3">
-          
-        </div><!--End Row-->
-  
-        <div class="row">
-            <div class="col-12 col-lg-6 col-xl-4">
-              <div class="card profile-card-1">
-                 <img src="https://via.placeholder.com/800x500" class="background" alt="profile-image"/>
-                 <img src="{{asset('images/user/profile/'.$user->id.'/'.$user->user_photo)}}" alt="profile-image" class="profile"/>
-                 <div class="card-content">
-                    <h2 class="text-white">{{$->username}}<small>{{$user->email}}</small></h2>
-                      <div class="icon-block">
-                          <a href="javascript:void();"><i class="fa fa-facebook bg-facebook text-white"></i></a>
-                          <a href="javascript:void();"> <i class="fa fa-twitter bg-twitter text-white"></i></a>
-                          <a href="javascript:void();"> <i class="fa fa-google-plus bg-google-plus text-white"></i></a>
-                      </div>
-                  </div>
-              </div>
-            </div>
-          </div><!--End Row-->
-  
-        <!--End Dashboard Content-->
-  
-      </div>
-      <!-- End container-fluid-->
-      
-      </div><!--End content-wrapper-->
-     <!--Start Back To Top Button-->
-      <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
-      <!--End Back To Top Button-->
-      
-      <!--Start footer-->
-      <footer class="footer">
-        <div class="container">
-          <div class="text-center">
-            Copyright © 2020 OnlineArtPerformance Admin
+      <div class="container-fluid">    
+        <div class="row">    
+          <div class="card-body">
+            <p class="card-text"><strong>{{ $vaccine->vaccine_name }}</strong></p>
+              <h5 class="card-title text-dark">Available at HealthCare Centres: </h5>
+            <!-- Start looping centres in relasi -->
+                <ul class="list-group list-group-flush list shadow-none">  
+                  @foreach($relasi as $r)
+                  @if()
+                    @foreach($centre as $c)
+                      @if($r>centre_id==$c->id)
+                      <i class="list-group-item d-flex justify-content-between align-items-center"class="list-group-item d-flex justify-content-between align-items-center">
+                        HealthCare Centre {{ c['centre_name'] }}
+                        <br>
+                        {{ c['address'] }}
+                        <span class="badge badge-success badge-pill">v</span>
+                      </li>
+                      @endif
+                    @endforeach
+                  @endforeach
+                </ul>
+            <!-- End looping centres in relasi -->
           </div>
+        </div>  
+      </div><!-- End container-fluid-->
+    </div><!--End content-wrapper-->
+    <!--Start Back To Top Button-->
+    <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+    <!--End Back To Top Button-->  
+    <!--Start footer-->
+    <footer class="footer">
+      <div class="container">
+        <div class="text-center">
+          Copyright © 2021 PeopleCare PCVS Web || Developer Team
         </div>
-      </footer>
-      <!--End footer-->
-     
-    </div><!--End wrapper-->
-
+      </div>
+    </footer>
+    <!--End footer-->
+  </div>
+</div> 
 @endsection

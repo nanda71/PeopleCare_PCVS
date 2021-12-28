@@ -93,11 +93,12 @@
 
     <div class="limiter">
         <div class="container-login100">
+        <a class="btn btn-info" href="/" >Back</a><br>
             <div class="wrap-login100">
                 <div class="login100-pic js-tilt" data-tilt>
-                    <img src="{{asset('loginuser/images/img-01.png')}}" alt="IMG">
+                    <img src="{{URL::asset('loginuser/images/img-01.png')}}" alt="IMG">
                 </div>
-    
+                
                 <form class="login100-form validate-form" action="/admin/register" method="POST">
                     @csrf
                     <span class="login100-form-title">
@@ -125,10 +126,8 @@
                         </span>
                     </div>
                     <!-- pilih healthcare centre -->
+                    <label>Healthcare Centre</label>
                     <select class="form-control" id="input-4" name="centre_id">
-                            <option value="">
-                                Please select healthcare centre
-                            </option>
                         @foreach ($Centres as $c)
                             <option value="{{ $c->id }}"> 
                                 {{ $c->centre_name }}

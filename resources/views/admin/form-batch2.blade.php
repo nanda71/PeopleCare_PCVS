@@ -19,26 +19,32 @@
               <div class="card-body">
                 <div class="card-title">Batch Form</div>
                 <hr>
-                <form method="POST" action="/admin/PostNewBatch">
+                <form method="POST" action="/admin/PostNewBatch2">
                   @csrf
                   <div class="form-group">
                     <label for="input-1">Registered into healthcare Centre:</label>
                     <input type="text" class="form-control" id="input-1" name="centre_name" value = "{{ $centre->centre_name }}" readonly>
                   </div>
                   <div class="form-group">
-                    <label for="input-1">Vaccine Name</label>
-                    <input type="text" class="form-control" id="input-2" name="vaccine_name" value = "{{ $vaccine->vaccine_name }}" readonly>
+                    <label for="input-2">Vaccine</label>
+                    <select class="form-control" id="input-2" name="vaccine_name">
+                        @foreach ($vaccine as $v)
+                          <option value="{{ $v->vaccine_name }}">
+                            {{ $v->vaccine_name }} - {{ $v->manufacturer }}
+                          </option>
+                        @endforeach
+                    </select>
                   </div>
                   <div class="form-group">
-                      <label for="input-2">ExpiryDate</label>
+                      <label for="input-3">ExpiryDate</label>
                       <input type="date" class="form-control" id="input-3" name="expiry_date" placeholder="Enter vaccine name">
                   </div>
                   <div class="form-group">
-                      <label for="input-3">Quantity Available</label>
+                      <label for="input-4">Quantity Available</label>
                       <input type="text" class="form-control" id="input-4" name="qty_available" placeholder="Enter quantity">
                   </div>
                   <div class="form-group">
-                      <label for="input-4">Quantity administered</label>
+                      <label for="input-5">Quantity administered</label>
                       <input type="text" class="form-control" id="input-5" name="qty_administered" placeholder="Administered quantity">
                   </div>
                   <div class="form-group">
@@ -51,15 +57,15 @@
         </div>
       </div>     
     </div><!--End content-wrapper-->
-      <!--Start footer-->
-      <footer class="footer">
-        <div class="container">
-          <div class="text-center">
-            Copyright © 2021 PeopleCarePCVS Website || Developer Team
-          </div>
+    <!--Start footer-->
+    <footer class="footer">
+      <div class="container">
+        <div class="text-center">
+          Copyright © 2021 PeopleCarePCVS Website || Developer Team
         </div>
-      </footer>
-      <!--End footer-->
+      </div>
+    </footer>
+    <!--End footer-->
      
     </div><!--End wrapper-->
 

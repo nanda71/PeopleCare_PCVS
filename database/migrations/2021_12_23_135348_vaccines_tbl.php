@@ -15,10 +15,10 @@ class VaccinesTbl extends Migration
     {
         Schema::create('t_vaccines', function (Blueprint $table) {
             $table->id();
-            $table->string('vaccine_name');
+            $table->string('vaccine_name')->unique();
             $table->string('manufacturer');
-            $table->bigInteger('centre_id')->unsigned();
-            $table->foreign('centre_id')->references('id')->on('t_centre');
+            // $table->bigInteger('centre_id')->unsigned();
+            // $table->foreign('centre_id')->references('id')->on('t_centre');
             $table->timestamps();
         });
     }

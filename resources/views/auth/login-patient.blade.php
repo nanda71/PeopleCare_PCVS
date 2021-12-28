@@ -79,6 +79,7 @@
 
     <div class="limiter">
         <div class="container-login100">
+            <a class="btn btn-info" href="/" >Back</a><br>
             <div class="wrap-login100">
                 <div class="login100-pic js-tilt" data-tilt>
                     <img src="{{asset('loginuser/images/img-01.png')}}" alt="IMG">

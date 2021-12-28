@@ -32,12 +32,11 @@ Route::prefix('patient')->group(function(){
     // Route::get('/profile',"Patient\ProfileController@index");
     // Route::post('/profile/update',"Patient\ProfileController@PostUpdateProfile");
     // 
-    //----- Vaccinations & Vaccines -----
+    //----- Vaccinations -----
     Route::get('/AllVaccines',"Patient\PatientController@GetAllVaccines");
+    Route::get('/detailVaccine/{id}',"Patient\PatientController@getVaccineDetail");;
     Route::get('/getAppointmentForm',"Patient\PatientController@getRequestForm");
     Route::post('/NewAppointment',"Patient\PatientController@RequestAppointment");;
-
-    Route::get('detail/{id}',"Patient\PatientController@getVaccineDetail");;
 });
 
 // ===== Admin =====
@@ -50,21 +49,24 @@ Route::prefix('admin')->group(function (){
         //---- Home -----
         Route::get('/home',"Admin\AdminController@index");
         // 
-        //---- profile -----
+        //---- Profile -----
         // Route::get('/profile',"Admin\ProfileController@index");
         // Route::post('/profile/update',"Admin\ProfileController@PostUpdateProfile");
         // 
-        //---- Vaccine ----- 
-        Route::get('/AllVaccine',"Admin\AdminController@ViewAllVaccines");;
+        //---- Vaccine -----  (tidak dipakai)
         Route::get('/getFormVaccine',"Admin\AdminController@getFormVaccine");;
         Route::post('/NewVaccine',"Admin\AdminController@PostNewVaccine");;
         // 
         //----- Vaccine Batch ----
-        Route::post('/PostNewBatch',"Admin\AdminController@postFormBatch");;
+        Route::get('/AllVaccine',"Admin\AdminController@ViewAllVaccines");;
         Route::get('/NewBatch/{id}',"Admin\AdminController@getFormBatch");;
+        Route::post('/PostNewBatch',"Admin\AdminController@postFormBatch");;
+        // (yg baru)
+        Route::get('/NewBatch',"Admin\AdminController@getFormBatchSelect");;
+        Route::post('/PostNewBatch2',"Admin\AdminController@postFormBatchSelect");;
         Route::get('/BatchDetail/{id}',"Admin\AdminController@getBatchDetail");;
         // 
-        //---- Vaccination Appointment ----
+        //---- Confirm/Reject Appointment ----
         // 
         // 
         

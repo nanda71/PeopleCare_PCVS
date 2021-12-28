@@ -77,6 +77,7 @@
 </head>
 <body class="animsition">
     <div class="limiter">
+        <a class="btn btn-info" href="/" >Back</a><br>
         <div class="container-login100">
             <div class="wrap-login100">
                 <div class="login100-pic js-tilt" data-tilt>

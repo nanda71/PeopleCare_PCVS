@@ -21,4 +21,18 @@ class t_relasiVaccineCentre extends Model
         return $this->belongsTo('App\Models\t_centre');
     }
 
+    public static function CreateRelasi($data){
+        $Relasi = self::create($data);
+        if($Relasi){
+            return (object)
+            [
+                "success"=>true,
+                "data"=>$Relasi
+            ];}
+        return (object)[
+            "success"=>false,
+            "message"=>"Failed to add Batch!"
+        ];
+    }
+
 }

@@ -10,12 +10,10 @@ class t_vaccines extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-
     protected $table = "t_vaccines";
     protected $fillable = [
         'vaccine_name',
-        'manufacturer',
-        'centre_id',
+        'manufacturer'
     ];
 
     public function getID(){
@@ -42,8 +40,8 @@ class t_vaccines extends Model
         ];
     }
     
-    public static function getBatchById($vaccine_id){
-        $data=self::where("vaccine_id",$vaccine_id)->get();
+    public static function getVaccineById($id){
+        $data=self::where("id",$id)->get();
         if($data){
             return (object)[
                 "success"=>true,
@@ -56,6 +54,12 @@ class t_vaccines extends Model
             "exist"=>false,
             "message"=>"failed"
         ];
+    }
+
+    public static function getIdByName($name){
+        $search=self::where('vaccine_name',$name)->get();
+        $data = $search[0]->id;
+        return $data;
     }
 
     public static function getAllVaccine(){

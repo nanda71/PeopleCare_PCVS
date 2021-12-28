@@ -13,8 +13,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call(dummy_admin::class);
-        $this->call(dummy_patient::class);
-        $this->call(dummy_healthcare_centre::class);
+        $this->call(dummy_centre::class);
+        $this->call(dummy_vaccines::class);
     }
 }

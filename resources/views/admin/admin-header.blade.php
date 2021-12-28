@@ -10,12 +10,13 @@
     </ul>   
     <!-- profile admin here -->
     @if(Session::get('login'))
-    <a href="#" style="margin-right: 51px"> 
-      Hi, 
-      @if(Session::get('role')==1)Patient @else Admin @endif
-      <span style="font-weight: 600; color:rgb(247, 14, 14);">{{Session::get('username')}}</span>             
-    </a>
-      @endif
+      <a href="#" style="margin-right: 51px"> 
+        Hi, @if(Session::get('role')==1)Patient @else Admin @endif
+        <span style="font-weight: 600; color:rgb(247, 14, 14);">{{Session::get('username')}}</span>             
+      </a>
+    @endif
     <span class="topbar-email">
       <a href="/logout" style="margin-right:43px">Logout</a>
     </span>
+  </nav>
+</header

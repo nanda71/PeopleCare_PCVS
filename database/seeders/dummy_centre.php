@@ -24,7 +24,19 @@ class dummy_centre extends Seeder
             ],[
                 'centre_name'=>'Puri Bundha',
                 'address'=>'Gianyar',
-             ],
+            ],[
+                'centre_name'=>'Ubud Care',
+                'address'=>'Gianyar',
+            ],[
+                'centre_name'=>'Fullerton Clinic',
+                'address'=>'Badung',
+            ],[
+                'centre_name'=>'Tjandra',
+                'address'=>'Gianyar',
+            ],[
+                'centre_name'=>'BIMC',
+                'address'=>'Kuta',
+            ],
              
         ];
   

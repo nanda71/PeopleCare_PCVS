@@ -22,25 +22,34 @@ class AdminController extends Controller
         $allBatch = Batch::all();
         $centre = Centre::find(Session::get('centre_id'));
         $admin = Admin::find(Session::get('id'));
+        $relasi = Relasi::all();
+        $vaccine = Vaccine::all();
+        // $centresVaccine = Centre::where('id',$vaccine['centre_id'])->get();
         return view('admin.admin-menu',[
             "patient"=>$patient,
             "admin"=>$admin,
             "allBatch"=>$allBatch,
             "centre"=>$centre,
+            "relasi"=>$relasi
         ]);
     }
 
     public function ViewAllVaccines(Request $req){
-        $all = Vaccine::all();
+        $vaccine = Vaccine::all();
+        $relasi = Relasi::all();
         $centre = Centre::find(Session::get('centre_id'));
         return view('admin.AllVaccine',[
             "centre"=>$centre,
-            "all"=>$all,
+            "vaccine"=>$vaccine,
+            "relasi"=>$relasi
         ]);
     }
 
     public function getFormVaccine(){
-        return view('admin.form-input-vaccine');
+        $vaccine = Vaccine::all();
+        return view('admin.form-input-vaccine',[
+            "vaccine"=>$vaccine,
+        ]);
     }
 
     public function PostNewVaccine(Request $req){
@@ -50,16 +59,15 @@ class AdminController extends Controller
             'centre_id'=>"required|exists:t_centre,id",
         ]);
         $newVaccine = Vaccine::createVaccine($validatedData);
-        $newRelasi = Relasi::create([
+        // dd($newVaccine);
+        $newRelasi = Relasi::CreateRelasi([
             "vaccine_id"=>$newVaccine->data->id,
-            "centre_id"=>$Session::get('centre_id')
+            "centre_id"=>Session::get('centre_id')
         ]);
+        // dd($newRelasi);
         if(!$newVaccine->success){
             return redirect()->back()->with('toast_error',["Failed to input information"]);
         }
-        // if(!ifRelated->success){
-        //     return redirect()->back()->with('toast_error',["Failed to input information, not related"]);
-        // }
         return redirect('/admin/AllVaccine')->with('toast_success',["Input Information Success"]);
     }
     // ==== VACCINE BATCH ====
@@ -71,6 +79,46 @@ class AdminController extends Controller
             "centre"=>$centre,
         ]);
     }
+
+    public function getFormBatchSelect(){
+        $centre = Centre::find(Session::get('centre_id'));
+        $vaccine = Vaccine::all();
+        return view('admin.form-batch2',[
+            "centre"=>$centre,
+            "vaccine"=>$vaccine
+        ]);
+    }
+
+    public function postFormBatchSelect(Request $req){
+        $req->merge([
+            "centre_name"=>$req->centre_name,
+            "vaccine_name"=>$req->vaccine_name,
+            "expiry_date"=>$req->expiry_date,
+            "qty_available"=>$req->qty_available,
+            "qty_administered"=>$req->qty_administered,
+        ]);
+        // dd($req->vaccine_name);
+        $validatedData = $req->validate([
+            'centre_name'=>"required",
+            'vaccine_name'=>"required",
+            'expiry_date'=>"required",
+            'qty_available'=>"required",
+            'qty_administered'=>"required",
+        ]);
+
+        $validated = Batch::CreateBatch($validatedData);
+        $id = Vaccine::getIdByName($validated->data->vaccine_name); 
+        $newRelasi = Relasi::CreateRelasi([
+            "vaccine_id"=>$id,
+            "centre_id"=>Session::get('centre_id')
+        ]);
+
+        if(!$validated->success){
+            return redirect()->back()->with('toast_error',["Failed to input information"]);
+        }
+        return redirect('/admin/home')->with('toast_success',["Input Information Success"]);
+    }
+
     public function postFormBatch(Request $req){
         $validatedData = $req->validate([
             'centre_name'=>"required",
@@ -83,7 +131,7 @@ class AdminController extends Controller
         if(!$validated->success){
             return redirect()->back()->with('toast_error',["Failed to input information"]);
         }
-        return redirect('/admin/batch')->with('toast_success',["Input Information Success"]);
+        return redirect('/admin/home')->with('toast_success',["Input Information Success"]);
     }
 
     // public function getBatchDetail($batch_id){

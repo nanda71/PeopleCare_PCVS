@@ -32,27 +32,30 @@
           </div>
         </div>
         <!-- end show centre name -->
-        <div class="card-title">Available Vaccines</div>
-        <a class="btn btn-info" href="/admin/getFormVaccine" >Add New</a><br><br>
+        <div class="card-title">Registered Vaccines</div>
         <!-- Table -->
         <table>
           <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">Vaccine Name</th>
-              <th scope="col">Manufacturer</th>
-              <th scope="col">Option</th>
+              <th scope="col">#|</th>
+              <th scope="col"> Vaccine Name |</th>
+              <th scope="col"> Manufacturer |</th>
             </tr>
           </thead>
           <tbody>
             <?php $no=1; ?>
-            @foreach($all as $a)
-            <tr>
-              <th scope="row">{{ $no++ }}</th>
-              <td>{{ $a->vaccine_name }}</td>
-              <td>{{ $a->manufacturer }}</td>
-              <td><a href="/admin/NewBatch/{{$a -> id}}">Batch</a></td>
-            </tr>
+            @foreach ($relasi as $r)
+            @if($r->centre_id==Session::get('centre_id'))
+              @foreach ($vaccine as $v)
+              @if($v->id==$r->vaccine_id)
+                <tr>
+                  <th scope="row">{{ $no++ }} | </th>
+                  <td>{{ $v->vaccine_name }}</td>
+                  <td>{{ $v->manufacturer }}</td>
+                </tr>
+              @endif
+              @endforeach
+            @endif
             @endforeach
           </tbody>
         </table>

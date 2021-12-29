@@ -33,7 +33,7 @@ class AdminController extends Controller
             "relasi"=>$relasi
         ]);
     }
-
+// ==== VACCINE ====
     public function ViewAllVaccines(Request $req){
         $vaccine = Vaccine::all();
         $relasi = Relasi::all();
@@ -59,12 +59,10 @@ class AdminController extends Controller
             'centre_id'=>"required|exists:t_centre,id",
         ]);
         $newVaccine = Vaccine::createVaccine($validatedData);
-        // dd($newVaccine);
         $newRelasi = Relasi::CreateRelasi([
             "vaccine_id"=>$newVaccine->data->id,
             "centre_id"=>Session::get('centre_id')
         ]);
-        // dd($newRelasi);
         if(!$newVaccine->success){
             return redirect()->back()->with('toast_error',["Failed to input information"]);
         }
@@ -105,7 +103,6 @@ class AdminController extends Controller
             'qty_available'=>"required",
             'qty_administered'=>"required",
         ]);
-
         $validated = Batch::CreateBatch($validatedData);
         $id = Vaccine::getIdByName($validated->data->vaccine_name); 
         $newRelasi = Relasi::CreateRelasi([

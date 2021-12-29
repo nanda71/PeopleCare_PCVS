@@ -30,7 +30,7 @@
                     <select class="form-control" id="input-2" name="vaccine_name">
                         @foreach ($vaccine as $v)
                           <option value="{{ $v->vaccine_name }}">
-                            {{ $v->vaccine_name }} - {{ $v->manufacturer }}
+                            {{ $v->vaccine_name }} - {{ $v->manufactrer }}
                           </option>
                         @endforeach
                     </select>
